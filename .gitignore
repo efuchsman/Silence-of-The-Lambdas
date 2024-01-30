@@ -1,1 +1,6 @@
 .env
+shared-local-instance.db
+dynamodb-local-metadata.json
+LICENSE.txt
+README.txt
+THIRD-PARTY-LICENSES.txt
