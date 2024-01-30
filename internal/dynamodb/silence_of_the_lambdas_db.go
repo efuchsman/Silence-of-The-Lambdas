@@ -8,6 +8,7 @@ import (
 )
 
 type Client interface {
+	ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error)
 }
 
 type Credentials struct {

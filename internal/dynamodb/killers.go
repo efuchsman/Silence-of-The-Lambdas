@@ -18,8 +18,8 @@ type Killer struct {
 	Profession  string   `json:"profession"`
 }
 
+// ReturnKillerByFullName takes in a fullName and table input with no spaces and calls on Dynamodb to return the item
 func ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
-	// Prepare input for GetItem
 	input := &dynamodb.GetItemInput{
 		TableName: aws.String(tableName),
 		Key: map[string]*dynamodb.AttributeValue{
@@ -29,14 +29,12 @@ func ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheL
 		},
 	}
 
-	// GetItem request using the provided DynamoDB client
 	result, err := db.DynamoDB.GetItem(input)
 	if err != nil {
 		log.Fatal("Error getting item:", err)
 		return nil, err
 	}
 
-	// Parse the result into Killers struct
 	item := &Killer{}
 	err = dynamodbattribute.UnmarshalMap(result.Item, item)
 	if err != nil {
