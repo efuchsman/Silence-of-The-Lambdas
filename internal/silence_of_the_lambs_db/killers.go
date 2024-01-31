@@ -1,4 +1,4 @@
-package dynamodb
+package silenceofthelambsdb
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
@@ -18,7 +18,7 @@ type Killer struct {
 }
 
 // ReturnKillerByFullName takes in a fullName and table input with no spaces and calls on Dynamodb to return the item
-func ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
+func (ddb *SilenceOfTheLambsDB) ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
 	input := &dynamodb.GetItemInput{
 		TableName: aws.String(tableName),
 		Key: map[string]*dynamodb.AttributeValue{

@@ -1,6 +1,9 @@
 package silenceofthelambdas
 
-import "github.com/efuchsman/Silence-of-The-Lambdas/internal/dynamodb"
+import (
+	lambsdb "github.com/efuchsman/Silence-of-The-Lambdas/internal/silence_of_the_lambs_db"
+	log "github.com/sirupsen/logrus"
+)
 
 type Killer struct {
 	FullName    string   `json:"full_name"`
@@ -12,6 +15,24 @@ type Killer struct {
 	Profession  string   `json:"profession"`
 }
 
-func (c *SilenceOfTheLambdasClient) ReturnKillerByFullName(fullName string, tableName string, db *dynamodb.SilenceOfTheLambsDB) (*Killer, error) {
-	return nil, nil
+func (c *SilenceOfTheLambdasClient) ReturnKillerByFullName(fullName string, tableName string, db *lambsdb.SilenceOfTheLambsDB) (*Killer, error) {
+	fields := log.Fields{"full_name": fullName, "table_name": tableName}
+
+	dynamoKiller, err := c.db.ReturnKillerByFullName(fullName, tableName, db)
+	if err != nil {
+		log.WithFields(fields).Errorf("ERROR FETCHING KILLER FROM DYNAMODB: %+v", err)
+		return nil, err
+	}
+
+	killer := &Killer{
+		FullName:    dynamoKiller.FullName,
+		FirstName:   dynamoKiller.FirstName,
+		LastName:    dynamoKiller.FirstName,
+		MovieActors: dynamoKiller.MovieActors,
+		Movies:      dynamoKiller.Movies,
+		Nickname:    dynamoKiller.Nickname,
+		Profession:  dynamoKiller.Profession,
+	}
+
+	return killer, nil
 }

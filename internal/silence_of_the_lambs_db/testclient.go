@@ -1,4 +1,4 @@
-package dynamodb
+package silenceofthelambsdb
 
 type TestClient struct {
 	ReturnKillerByFullNameData *Killer

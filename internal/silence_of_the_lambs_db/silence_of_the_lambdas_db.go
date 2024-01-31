@@ -1,4 +1,4 @@
-package dynamodb
+package silenceofthelambsdb
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
