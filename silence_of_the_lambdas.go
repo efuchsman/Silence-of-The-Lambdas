@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
+
 	"os"
 
 	ddb "github.com/efuchsman/Silence-of-The-Lambdas/internal/dynamodb"
 	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
