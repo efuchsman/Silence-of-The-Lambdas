@@ -6,3 +6,4 @@ README.txt
 THIRD-PARTY-LICENSES.txt
 DynamoDBLocal.jar
 DynamoDBLocal_lib/
+tests.http

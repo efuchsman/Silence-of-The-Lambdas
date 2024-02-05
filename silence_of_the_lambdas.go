@@ -29,7 +29,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		SecretAccessKey: awsSecretAccessKey,
 	}
 
-	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, "http://localhost:8000", &dynamoCreds)
+	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, awsRegion, &dynamoCreds)
 	if err != nil {
 		log.Fatal("Error creating SilenceOfTheLambsDB instance:", err)
 	}
