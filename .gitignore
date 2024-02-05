@@ -7,3 +7,4 @@ THIRD-PARTY-LICENSES.txt
 DynamoDBLocal.jar
 DynamoDBLocal_lib/
 tests.http
+deployment.zip
