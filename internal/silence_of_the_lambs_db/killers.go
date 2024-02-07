@@ -30,14 +30,14 @@ func (ddb *SilenceOfTheLambsDB) ReturnKillerByFullName(fullName string, tableNam
 
 	result, err := db.DynamoDB.GetItem(input)
 	if err != nil {
-		log.Fatal("Error getting item:", err)
+		log.Println("Error getting item:", err)
 		return nil, err
 	}
 
 	item := &Killer{}
 	err = dynamodbattribute.UnmarshalMap(result.Item, item)
 	if err != nil {
-		log.Fatal("Error unmarshalling item:", err)
+		log.Println("Error unmarshalling item:", err)
 		return nil, err
 	}
 

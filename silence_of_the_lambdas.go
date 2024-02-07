@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"strings"
 
 	"os"
 
@@ -17,6 +18,7 @@ import (
 
 func init() {
 	log.SetFormatter(&log.TextFormatter{})
+	log.SetOutput(os.Stdout)
 }
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
@@ -33,7 +35,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 		SecretAccessKey: awsSecretAccessKey,
 	}
 
-	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, awsRegion, &dynamoCreds)
+	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, "", &dynamoCreds)
 	if err != nil {
 		log.Fatal("Error creating SilenceOfTheLambsDB instance:", err)
 	}
@@ -41,41 +43,65 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 	sOTLClient := silence.NewSilenceOfTheLambdasClient(db)
 	silenceHandler := handlers.NewHandler(sOTLClient)
 
-	log.Printf("Received %s request for path: %s", request.HTTPMethod, request.Path)
+	log.WithFields(log.Fields{
+		"headers":    request.Headers,
+		"path":       request.Path,
+		"httpMethod": request.HTTPMethod,
+	}).Info("Request details")
 
-	switch request.HTTPMethod {
-	case "GET":
+	if request.HTTPMethod == "GET" {
 		response, err := handleGetRequest(request, silenceHandler, db)
 		if err != nil {
-			log.Printf("Error handling GET request: %v", err)
+			log.WithFields(log.Fields{
+				"error":   err,
+				"request": request,
+			}).Error("Error handling GET request")
 			return events.APIGatewayProxyResponse{
 				StatusCode: 500,
 				Body:       "Internal Server Error",
 			}, nil
 		}
 		return *response, nil
-	default:
-		return events.APIGatewayProxyResponse{
-			StatusCode: 405,
-			Body:       "Method Not Allowed",
-		}, nil
 	}
+
+	return events.APIGatewayProxyResponse{
+		StatusCode: 405,
+		Body:       "Method Not Allowed",
+	}, nil
 }
 
 func handleGetRequest(request events.APIGatewayProxyRequest, handler *handlers.Handler, db *ddb.SilenceOfTheLambsDB) (*events.APIGatewayProxyResponse, error) {
-	switch request.Path {
+	cleanedPath := strings.TrimSpace(request.Path)
+	log.WithFields(log.Fields{
+		"cleanedPath": cleanedPath,
+		"headers":     request.Headers,
+		"path":        request.Path,
+		"httpMethod":  request.HTTPMethod,
+	}).Info("Request details")
+
+	switch cleanedPath {
 	case "/":
-		log.Println("Handling root path request.")
+		log.WithFields(log.Fields{
+			"path":    request.Path,
+			"request": request,
+		}).Info("Handling root path request")
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 200,
-			Body:       "Hello, World!",
+			Body:       "Welcome to Silence of The Lambs API!",
 		}, nil
 	case "/killers/full_name":
-		log.Println("Handling /killers/full_name path request.")
 		tableName := os.Getenv("DYNAMODB_TABLE_1_NAME")
 		response := handler.GetKiller(request, tableName, db)
+		log.WithFields(log.Fields{
+			"path":    request.Path,
+			"request": request,
+		}).Info("Handling /killers/full_name request")
 		return response, nil
 	default:
+		log.WithFields(log.Fields{
+			"cleanedPath": cleanedPath,
+			"request":     request,
+		}).Warn("Unknown path requested")
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 404,
 			Body:       "Not Found",
@@ -85,4 +111,5 @@ func handleGetRequest(request events.APIGatewayProxyRequest, handler *handlers.H
 
 func main() {
 	lambda.Start(Handler)
+	log.StandardLogger().Exit(0)
 }
