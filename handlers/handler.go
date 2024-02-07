@@ -19,15 +19,9 @@ func NewHandler(s silence.Client) *Handler {
 	}
 }
 
-func (h *Handler) GetKiller(req events.APIGatewayProxyRequest, tableName string, db *dynamodb.SilenceOfTheLambsDB) *events.APIGatewayProxyResponse {
-	fullName, ok := req.PathParameters["fullName"]
-	if !ok {
-		response := BadRequest400(events.APIGatewayProxyResponse{}, "Killer", "fullName")
-		return &response
-	}
-
+func (h *Handler) GetKiller(req events.APIGatewayProxyRequest, tableName string, db *dynamodb.SilenceOfTheLambsDB, fullName string) *events.APIGatewayProxyResponse {
 	if strings.Contains(fullName, " ") {
-		response := BadRequest400(events.APIGatewayProxyResponse{}, "Killer", "fullName")
+		response := BadRequest400(events.APIGatewayProxyResponse{}, "Killer", "full_name")
 		return &response
 	}
 

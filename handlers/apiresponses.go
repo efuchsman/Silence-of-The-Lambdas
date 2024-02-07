@@ -67,6 +67,10 @@ func write(response events.APIGatewayProxyResponse, data interface{}) events.API
 		return response
 	}
 
+	if response.Headers == nil {
+		response.Headers = make(map[string]string)
+	}
+
 	response.Headers["Content-Type"] = "application/json"
 
 	if data != nil {
