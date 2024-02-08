@@ -100,15 +100,8 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
-	awsAccessKeyID := os.Getenv("AWS_ACCESS_KEY_ID")
-	awsSecretAccessKey := os.Getenv("AWS_SECRET_ACCESS_KEY")
 	awsRegion := os.Getenv("AWS_REGION")
-	dynamoCreds := ddb.Credentials{
-		AccessKeyID:     awsAccessKeyID,
-		SecretAccessKey: awsSecretAccessKey,
-	}
-
-	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, "", &dynamoCreds)
+	db, err := ddb.NewSilenceOfTheLambsDB(awsRegion, "")
 	if err != nil {
 		log.Fatal("Error creating SilenceOfTheLambsDB instance:", err)
 	}

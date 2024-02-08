@@ -2,7 +2,6 @@ package silenceofthelambsdb
 
 import (
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 )
@@ -20,12 +19,9 @@ type SilenceOfTheLambsDB struct {
 	DynamoDB *dynamodb.DynamoDB
 }
 
-func NewSilenceOfTheLambsDB(region string, endpoint string, creds *Credentials) (*SilenceOfTheLambsDB, error) {
-	awsCreds := credentials.NewStaticCredentials(creds.AccessKeyID, creds.SecretAccessKey, "")
-
+func NewSilenceOfTheLambsDB(region string, endpoint string) (*SilenceOfTheLambsDB, error) {
 	awsConfig := aws.Config{
-		Region:      aws.String(region),
-		Credentials: awsCreds,
+		Region: aws.String(region),
 	}
 
 	if endpoint != "" {
@@ -33,8 +29,7 @@ func NewSilenceOfTheLambsDB(region string, endpoint string, creds *Credentials) 
 	}
 
 	sess, err := session.NewSession(&aws.Config{
-		Region:      aws.String(region),
-		Credentials: awsCreds,
+		Region: aws.String(region),
 	})
 	if err != nil {
 		return nil, err
