@@ -5,6 +5,6 @@ type TestClient struct {
 	ReturnKillerByFullNameErr  error
 }
 
-func (c TestClient) ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
+func (c *TestClient) ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
 	return c.ReturnKillerByFullNameData, c.ReturnKillerByFullNameErr
 }

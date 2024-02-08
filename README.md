@@ -8,3 +8,7 @@
 
 
 <h1 align="center"> STILL A WIP</h1>
+
+# Resources
+
+- https://hannibal.fandom.com/wiki/Hannibal%27s_Kill_List

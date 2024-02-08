@@ -10,13 +10,12 @@ type Client interface {
 	ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error)
 }
 
-type Credentials struct {
-	AccessKeyID     string
-	SecretAccessKey string
+type DBClient interface {
+	GetItem(input *dynamodb.GetItemInput) (*dynamodb.GetItemOutput, error)
 }
 
 type SilenceOfTheLambsDB struct {
-	DynamoDB *dynamodb.DynamoDB
+	DynamoDB DBClient
 }
 
 func NewSilenceOfTheLambsDB(region string, endpoint string) (*SilenceOfTheLambsDB, error) {
