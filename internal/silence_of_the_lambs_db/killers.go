@@ -8,13 +8,13 @@ import (
 )
 
 type Killer struct {
-	FullName    string   `json:"full_name"`
-	FirstName   string   `json:"first_name"`
-	LastName    string   `json:"last_name"`
-	MovieActors []string `json:"movie_actors"`
-	Movies      []string `json:"movies"`
-	Nickname    string   `json:"nickname"`
-	Profession  string   `json:"profession"`
+	FullName    string   `json:"full_name" dynamodbav:"FullName"`
+	FirstName   string   `json:"first_name" dynamodbav:"FirstName"`
+	LastName    string   `json:"last_name" dynamodbav:"LastName"`
+	MovieActors []string `json:"movie_actors" dynamodbav:"MovieActors"`
+	Movies      []string `json:"movies" dynamodbav:"Movies"`
+	Nickname    string   `json:"nickname" dynamodbav:"Nickname"`
+	Profession  string   `json:"profession" dynamodbav:"Profession"`
 }
 
 // ReturnKillerByFullName takes in a fullName and table input with no spaces and calls on Dynamodb to return the item
