@@ -18,7 +18,7 @@ type Killer struct {
 }
 
 // ReturnKillerByFullName takes in a fullName and table input with no spaces and calls on Dynamodb to return the item
-func (ddb *SilenceOfTheLambsDB) ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error) {
+func (ddb *SilenceOfTheLambsDB) ReturnKillerByFullName(fullName string, tableName string) (*Killer, error) {
 	input := &dynamodb.GetItemInput{
 		TableName: aws.String(tableName),
 		Key: map[string]*dynamodb.AttributeValue{
@@ -28,7 +28,7 @@ func (ddb *SilenceOfTheLambsDB) ReturnKillerByFullName(fullName string, tableNam
 		},
 	}
 
-	result, err := db.DynamoDB.GetItem(input)
+	result, err := ddb.DynamoDB.GetItem(input)
 	if err != nil {
 		log.Println("Error getting item:", err)
 		return nil, err

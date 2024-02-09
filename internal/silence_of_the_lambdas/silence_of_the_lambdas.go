@@ -5,7 +5,7 @@ import (
 )
 
 type Client interface {
-	ReturnKillerByFullName(fullName string, tableName string, db *ddb.SilenceOfTheLambsDB) (*Killer, error)
+	ReturnKillerByFullName(fullName string, tableName string) (*Killer, error)
 }
 
 type SilenceOfTheLambdasClient struct {

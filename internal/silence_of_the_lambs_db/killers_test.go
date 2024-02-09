@@ -81,7 +81,7 @@ func TestReturnKillerByFullName(t *testing.T) {
 				DynamoDB: tc.client,
 			}
 
-			result, err := db.ReturnKillerByFullName(tc.FullName, "", db)
+			result, err := db.ReturnKillerByFullName(tc.FullName, "")
 
 			if tc.expectedErr != nil {
 				assert.Equal(t, tc.expectedErr, err)
@@ -91,7 +91,6 @@ func TestReturnKillerByFullName(t *testing.T) {
 				assert.Equal(t, tc.expectedRes, result)
 				require.NoError(t, err)
 			}
-
 		})
 	}
 }

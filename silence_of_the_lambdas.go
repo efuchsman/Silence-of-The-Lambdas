@@ -78,7 +78,7 @@ func (h *LambdaHandler) handleGetRequest(request events.APIGatewayProxyRequest, 
 			"table_name": tableName,
 		}).Info("Handling /killers/full_name request")
 
-		response := handler.GetKiller(request, tableName, h.db, fullName)
+		response := handler.GetKiller(request, tableName, fullName)
 
 		return response, nil
 	default:

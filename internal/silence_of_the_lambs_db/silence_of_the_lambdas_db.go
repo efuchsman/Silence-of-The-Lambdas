@@ -7,7 +7,7 @@ import (
 )
 
 type Client interface {
-	ReturnKillerByFullName(fullName string, tableName string, db *SilenceOfTheLambsDB) (*Killer, error)
+	ReturnKillerByFullName(fullName string, tableName string) (*Killer, error)
 }
 
 type DBClient interface {
