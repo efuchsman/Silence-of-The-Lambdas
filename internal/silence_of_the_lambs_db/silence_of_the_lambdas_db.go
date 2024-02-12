@@ -12,6 +12,7 @@ type Client interface {
 
 type DBClient interface {
 	GetItem(input *dynamodb.GetItemInput) (*dynamodb.GetItemOutput, error)
+	Query(input *dynamodb.QueryInput) (*dynamodb.QueryOutput, error)
 }
 
 type SilenceOfTheLambsDB struct {
