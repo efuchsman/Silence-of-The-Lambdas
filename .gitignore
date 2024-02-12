@@ -1,12 +1,8 @@
 .env
-shared-local-instance.db
-dynamodb-local-metadata.json
-LICENSE.txt
-README.txt
-THIRD-PARTY-LICENSES.txt
-DynamoDBLocal.jar
-DynamoDBLocal_lib/
 tests.http
 deployment.zip
 variables.tf
-terraform/
+.terraform/providers
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup

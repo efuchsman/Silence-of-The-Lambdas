@@ -56,7 +56,7 @@ func (h *LambdaHandler) handleGetRequest(request events.APIGatewayProxyRequest, 
 		}).Info("Handling root path request")
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 200,
-			Body:       "Welcome to Silence of The Lambs API!",
+			Body:       "Welcome to Silence of The Lambdas API!",
 		}, nil
 	case "/killers/{full_name}":
 		tableName := os.Getenv("DYNAMODB_TABLE_1_NAME")

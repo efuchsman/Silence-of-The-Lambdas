@@ -21,7 +21,7 @@ resource "aws_lambda_function" "silence_of_the_lambdas" {
   source_code_hash = filebase64(var.ZIP_FILE_PATH)
 }
 
-# Data source to fetch existing Lambda function details
+# Fetch existing Lambda function details
 data "aws_lambda_function" "existing_lambda" {
   function_name = var.LAMBDA_FUNCTION_NAME
 }
