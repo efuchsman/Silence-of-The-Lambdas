@@ -39,3 +39,12 @@ func (h *Handler) GetKiller(req events.APIGatewayProxyRequest, tableName string,
 	response := OK200(events.APIGatewayProxyResponse{}, killer)
 	return &response
 }
+
+func (h *Handler) GetVictimsByKiller(req events.APIGatewayProxyRequest, tableName string, killerName string) *events.APIGatewayProxyResponse {
+	if strings.Contains(killerName, " ") {
+		response := BadRequest400(events.APIGatewayProxyResponse{}, "Killer", "full_name")
+		return &response
+	}
+
+	return nil
+}

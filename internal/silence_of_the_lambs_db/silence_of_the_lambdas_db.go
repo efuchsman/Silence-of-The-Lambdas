@@ -8,6 +8,7 @@ import (
 
 type Client interface {
 	ReturnKillerByFullName(fullName string, tableName string) (*Killer, error)
+	ReturnVictimsByKiller(killerName string, tableName string) (*Victims, error)
 }
 
 type DBClient interface {
