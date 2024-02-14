@@ -36,7 +36,7 @@ func (ddb *SilenceOfTheLambsDB) ReturnVictimsByKiller(killerName string, tableNa
 
 	result, err := ddb.DynamoDB.Query(input)
 	if err != nil {
-		log.Println("Error getting item:", err)
+		log.Printf("Error querying DynamoDB: %v", err)
 		return nil, err
 	}
 

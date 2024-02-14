@@ -81,6 +81,29 @@ func (h *LambdaHandler) handleGetRequest(request events.APIGatewayProxyRequest, 
 		response := handler.GetKiller(request, tableName, fullName)
 
 		return response, nil
+	case "/killers/{full_name}/victims":
+		tableName := os.Getenv("DYNAMODB_TABLE_2_NAME")
+		handler := handlers.NewHandler(silence.NewSilenceOfTheLambdasClient(h.db))
+
+		fullName, ok := request.PathParameters["full_name"]
+		if !ok {
+			log.Warn("Missing path parameter 'full_name'")
+			return &events.APIGatewayProxyResponse{
+				StatusCode: 400,
+				Body:       "Bad Request: Missing 'full_name' parameter",
+			}, nil
+		}
+
+		log.WithFields(log.Fields{
+			"path":       request.Path,
+			"params":     request.PathParameters,
+			"request":    request,
+			"table_name": tableName,
+		}).Info("Handling /killers/full_name/victims request")
+
+		response := handler.GetVictimsByKiller(request, tableName, fullName)
+
+		return response, nil
 	default:
 		log.WithFields(log.Fields{
 			"path":    request.Path,

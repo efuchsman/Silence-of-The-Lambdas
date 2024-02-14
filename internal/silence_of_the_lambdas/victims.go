@@ -24,6 +24,7 @@ func (c *SilenceOfTheLambdasClient) ReturnVictimsByKiller(killerName string, tab
 	dynamoVictims, err := c.db.ReturnVictimsByKiller(killerName, tableName)
 	if err != nil {
 		log.WithFields(fields).Errorf("ERROR FETCHING VICTIMS FROM DYNAMODB: %+v", err)
+		return nil, err
 	}
 
 	for _, victim := range dynamoVictims.Victims {
