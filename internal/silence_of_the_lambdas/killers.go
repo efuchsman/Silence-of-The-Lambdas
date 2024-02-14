@@ -12,6 +12,7 @@ type Killer struct {
 	Movies      []string `json:"movies"`
 	Nickname    string   `json:"nickname"`
 	Profession  string   `json:"profession"`
+	Image       string   `json:"image"`
 }
 
 func (c *SilenceOfTheLambdasClient) ReturnKillerByFullName(fullName string, tableName string) (*Killer, error) {
@@ -31,6 +32,7 @@ func (c *SilenceOfTheLambdasClient) ReturnKillerByFullName(fullName string, tabl
 		Movies:      dynamoKiller.Movies,
 		Nickname:    dynamoKiller.Nickname,
 		Profession:  dynamoKiller.Profession,
+		Image:       dynamoKiller.Image,
 	}
 
 	return killer, nil

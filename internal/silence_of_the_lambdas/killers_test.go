@@ -22,6 +22,7 @@ var (
 		},
 		Nickname:   "Test NickName",
 		Profession: "Test",
+		Image:      "Test.jpg",
 	}
 )
 
@@ -51,6 +52,7 @@ func TestReturnKillerByFullName(t *testing.T) {
 				},
 				Nickname:   "Test NickName",
 				Profession: "Test",
+				Image:      "Test.jpg",
 			},
 			expectedErr: nil,
 		},

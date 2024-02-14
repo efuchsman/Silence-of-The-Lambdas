@@ -22,6 +22,7 @@ var (
 		},
 		Nickname:   "Test NickName",
 		Profession: "Test",
+		Image:      "Test.jpg",
 	}
 )
 
@@ -40,7 +41,7 @@ func TestGetKiller(t *testing.T) {
 				ReturnKillerByFullNameData: killer,
 			},
 			expectedCode: 200,
-			expectedBody: `{"full_name":"TestKiller","first_name":"Test","last_name":"Killer","movie_actors":["Actor"],"movies":["Movie"],"nickname":"Test NickName","profession":"Test"}`,
+			expectedBody: `{"full_name":"TestKiller","first_name":"Test","last_name":"Killer","movie_actors":["Actor"],"movies":["Movie"],"nickname":"Test NickName","profession":"Test","image":"Test.jpg"}`,
 		},
 	}
 	for i, tc := range testCases {

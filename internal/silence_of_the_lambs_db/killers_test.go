@@ -23,6 +23,7 @@ var (
 		},
 		Nickname:   "Test NickName",
 		Profession: "Test",
+		Image:      "Test.jpg",
 	}
 )
 
@@ -64,6 +65,9 @@ func TestReturnKillerByFullName(t *testing.T) {
 						},
 						"Profession": {
 							S: aws.String("Test"),
+						},
+						"Image": {
+							S: aws.String("Test.jpg"),
 						},
 					},
 				},

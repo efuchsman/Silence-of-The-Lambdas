@@ -15,6 +15,7 @@ type Killer struct {
 	Movies      []string `json:"movies" dynamodbav:"Movies"`
 	Nickname    string   `json:"nickname" dynamodbav:"Nickname"`
 	Profession  string   `json:"profession" dynamodbav:"Profession"`
+	Image       string   `json:"image" dynamodbav:"Image"`
 }
 
 // ReturnKillerByFullName takes in a fullName and table input with no spaces and calls on Dynamodb to return the item
