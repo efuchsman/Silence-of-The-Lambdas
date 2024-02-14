@@ -16,6 +16,7 @@ type Victim struct {
 	CauseOfDeath string `json:"cause_of_death" dynamodbav:"CauseOfDeath"`
 	Occupation   string `json:"occupation" dynamodbav:"Occupation"`
 	Cannibalized bool   `json:"cannibalized" dynamodbav:"Cannibalized"`
+	Image        string `json:"image" dynamodbav:"Image"`
 }
 
 type Victims struct {

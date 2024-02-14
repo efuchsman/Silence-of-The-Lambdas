@@ -11,6 +11,7 @@ type Victim struct {
 	CauseOfDeath string `json:"cause_of_death"`
 	Occupation   string `json:"occupation"`
 	Cannibalized bool   `json:"cannibalized"`
+	Image        string `json:"image"`
 }
 
 type Victims struct {
@@ -37,6 +38,7 @@ func (c *SilenceOfTheLambdasClient) ReturnVictimsByKiller(killerName string, tab
 			CauseOfDeath: victim.CauseOfDeath,
 			Occupation:   victim.Occupation,
 			Cannibalized: victim.Cannibalized,
+			Image:        victim.Image,
 		}
 		victims.Victims = append(victims.Victims, newVictim)
 	}
