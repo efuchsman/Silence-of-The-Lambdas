@@ -25,3 +25,14 @@ resource "aws_lambda_function" "silence_of_the_lambdas" {
 data "aws_lambda_function" "existing_lambda" {
   function_name = var.LAMBDA_FUNCTION_NAME
 }
+
+# Fetch existing API Gateway
+data "aws_api_gateway_rest_api" "existing_api" {
+  name = "Silence of the Lambdas"
+}
+
+# Gateway Beta Deployment
+resource "aws_api_gateway_deployment" "beta_deployment" {
+  rest_api_id = data.aws_api_gateway_rest_api.existing_api.id
+  stage_name  = "beta"
+}
