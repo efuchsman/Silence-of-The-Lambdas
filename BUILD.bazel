@@ -1,0 +1,47 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+filegroup(
+    name = "bootstrap_files",
+    srcs = ["bootstrap"],
+)
+
+filegroup(
+    name = "env_files",
+    srcs = [".env"],
+)
+
+go_binary(
+    name = "silence_of_the_lambdas",
+    embed = [":Silence-of-The-Lambdas_lib"],
+    visibility = ["//visibility:public"],
+)
+
+sh_binary(
+    name = "deployment",
+    srcs = [":silence_of_the_lambdas"],
+    data = [
+        ":bootstrap_files",
+        ":env_files",
+    ],
+)
+
+gazelle(
+    name = "gazelle",
+)
+
+go_library(
+    name = "Silence-of-The-Lambdas_lib",
+    srcs = ["silence_of_the_lambdas.go"],
+    importpath = "github.com/efuchsman/Silence-of-The-Lambdas",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//handlers",
+        "//internal/silence_of_the_lambdas",
+        "//internal/silence_of_the_lambs_db",
+        "@com_github_aws_aws_lambda_go//events:go_default_library",
+        "@com_github_aws_aws_lambda_go//lambda:go_default_library",
+        "@com_github_joho_godotenv//:go_default_library",
+        "@com_github_sirupsen_logrus//:go_default_library",
+    ],
+)

@@ -6,3 +6,9 @@ variables.tf
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+template.yml
+MODULE.bazel.lock
+/bazel-bin/*
+/bazel-out/*
+/bazel-silence-of-the-lambdas/*
+/bazel-testlogs/*
