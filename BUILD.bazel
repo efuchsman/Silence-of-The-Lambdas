@@ -17,13 +17,12 @@ go_binary(
     visibility = ["//visibility:public"],
 )
 
-sh_binary(
+genrule(
     name = "deployment",
-    srcs = [":silence_of_the_lambdas"],
-    data = [
-        ":bootstrap_files",
-        ":env_files",
-    ],
+    srcs = [":silence_of_the_lambdas", ":bootstrap_files", ":env_files"],
+    outs = ["deployment.zip"],
+    cmd = "zip $@ $(SRCS)",
+    visibility = ["//visibility:public"],
 )
 
 gazelle(

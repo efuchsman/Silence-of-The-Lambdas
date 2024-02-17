@@ -8,4 +8,4 @@ terraform.tfstate
 terraform.tfstate.backup
 template.yml
 MODULE.bazel.lock
-bazel
+bazel-*
