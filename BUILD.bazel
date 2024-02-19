@@ -2,26 +2,28 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 filegroup(
-    name = "bootstrap_files",
-    srcs = ["bootstrap"],
-)
-
-filegroup(
     name = "env_files",
     srcs = [".env"],
 )
 
 go_binary(
-    name = "silence_of_the_lambdas",
+    name = "bootstrap",
     embed = [":Silence-of-The-Lambdas_lib"],
+    goarch = "arm64",
+    goos = "linux",
     visibility = ["//visibility:public"],
 )
 
 genrule(
     name = "deployment",
-    srcs = [":silence_of_the_lambdas", ":bootstrap_files", ":env_files"],
+    srcs = [
+        ":bootstrap",
+        ":env_files",
+    ],
     outs = ["deployment.zip"],
-    cmd = "zip $@ $(SRCS)",
+    cmd = """
+    zip -j $@ $(SRCS)
+    """,
     visibility = ["//visibility:public"],
 )
 
@@ -38,9 +40,9 @@ go_library(
         "//handlers",
         "//internal/silence_of_the_lambdas",
         "//internal/silence_of_the_lambs_db",
-        "@com_github_aws_aws_lambda_go//events:go_default_library",
-        "@com_github_aws_aws_lambda_go//lambda:go_default_library",
-        "@com_github_joho_godotenv//:go_default_library",
-        "@com_github_sirupsen_logrus//:go_default_library",
+        "@com_github_aws_aws_lambda_go//events",
+        "@com_github_aws_aws_lambda_go//lambda",
+        "@com_github_joho_godotenv//:godotenv",
+        "@com_github_sirupsen_logrus//:logrus",
     ],
 )
