@@ -2,7 +2,7 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 load("@bazel_gazelle//:def.bzl", "gazelle")
 
 filegroup(
-    name = "env_files",
+    name = "env_file",
     srcs = [".env"],
 )
 
@@ -18,7 +18,7 @@ genrule(
     name = "deployment",
     srcs = [
         ":bootstrap",
-        ":env_files",
+        ":env_file",
     ],
     outs = ["deployment.zip"],
     cmd = """

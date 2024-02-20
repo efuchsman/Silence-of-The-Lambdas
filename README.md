@@ -7,7 +7,6 @@
 </div>
 
   <h3 align="center">
-    This severless API is still a work in progress!
     <br />
   </h3>
 </div>
@@ -25,6 +24,27 @@
 
 # App Description:
 * Silence of the Lambdas allows users to search for the killers from the movies, and the victims of those killers.
+
+# Learning Goals
+* Build a Lambda function that is uses resource triggers from the API Gateway
+* Integrate with DynamoDB
+* Provision deployments with Terraform
+* Provision building and testing with Bazel
+
+# System Requirements
+* Darwin AMD64
+* Go 1.21
+* Terraform v1.5.7
+* Bazel 7.0.2
+
+# Technologies Used
+[![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)](https://golang.org/)
+[![AWS Lambda](https://img.shields.io/badge/AWS_Lambda-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/lambda/)
+[![AWS API Gateway](https://img.shields.io/badge/AWS_API_Gateway-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/api-gateway/)
+[![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)](https://aws.amazon.com/dynamodb/)
+[![Bazel](https://img.shields.io/badge/Bazel-white?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiI+CiAgPHBhdGggc3R5bGU9ImZpbGw6Izc2RDI3NTsiICAgICAgZD0iTTE0NCAzMiBsMTEyIDExMiAtMTEyIDExMiBsLTExMiAtMTEyeiIvPgogIDxwYXRoIHN0eWxlPSJmaWxsOiM0M0EwNDc7IiAgICBkPSJNMzIgMTQ0IHYxMTIgbDExMiAxMTIgdi0xMTJ6Ii8+CgogIDxwYXRoIHN0eWxlPSJmaWxsOiM3NkQyNzU7IiAgICAgIGQ9Ik0zNjggMzIgIGwxMTIgMTEyIC0xMTIgMTEyIC0xMTIgLTExMnoiLz4KICA8cGF0aCBzdHlsZT0iZmlsbDojNDNBMDQ3OyIgICAgIGQ9Ik00ODAgMTQ0IHYxMTIgbC0xMTIgMTEyIHYtMTEyeiIvPgoKICA8cGF0aCBzdHlsZT0iZmlsbDojNDNBMDQ3OyIgICAgIGQ9Ik0yNTYgMTQ0IGwxMTIgMTEyIC0xMTIgMTEyIC0xMTIgLTExMnoiLz4KICA8cGF0aCBzdHlsZT0iZmlsbDojMDA3MDFBOyIgIGQ9Ik0yNTYgMzY4IHYxMTIgbC0xMTIgLTExMiAgdi0xMTJ6Ii8+CiAgPHBhdGggc3R5bGU9ImZpbGw6IzAwNDMwMDsiIGQ9Ik0yNTYgMzY4IGwxMTIgLTExMiB2MTEyIGwtMTEyIDExMnoiLz4KPC9zdmc+Cg==)](https://bazel.build/)
+[![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+
 
 # Resources
 
