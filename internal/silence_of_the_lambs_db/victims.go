@@ -8,6 +8,7 @@ import (
 )
 
 type Victim struct {
+	Killer       string `json:"killer" dynamodbav:"Killer"`
 	FullName     string `json:"full_name" dynamodbav:"FullName"`
 	FirstName    string `json:"first_name" dynamodbav:"FirstName"`
 	LastName     string `json:"last_name" dynamodbav:"LastName"`

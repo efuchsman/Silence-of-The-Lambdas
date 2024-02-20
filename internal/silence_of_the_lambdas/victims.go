@@ -3,6 +3,7 @@ package silenceofthelambdas
 import log "github.com/sirupsen/logrus"
 
 type Victim struct {
+	Killer       string `json:"killer"`
 	FullName     string `json:"full_name"`
 	FirstName    string `json:"first_name"`
 	LastName     string `json:"last_name"`
@@ -30,6 +31,7 @@ func (c *SilenceOfTheLambdasClient) ReturnVictimsByKiller(killerName string, tab
 
 	for _, victim := range dynamoVictims.Victims {
 		newVictim := &Victim{
+			Killer:       victim.Killer,
 			FullName:     victim.FullName,
 			FirstName:    victim.FirstName,
 			LastName:     victim.LastName,
